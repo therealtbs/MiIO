@@ -16,8 +16,6 @@ use Socket\Raw\Exception;
  */
 class MiIO
 {
-    const CACHE_KEY = 'MiIO';
-
     const INFO = 'miIO.info';
 
     /**
@@ -84,8 +82,7 @@ class MiIO
             $this->init($device);
         }
 
-        $cacheKey  = static::CACHE_KEY . $device->getIpAddress();
-        $requestId = \Cache::increment($cacheKey);
+        $requestId = $device -> incrementRequestId();
 
         $request = new Request();
         $request

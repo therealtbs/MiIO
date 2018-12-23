@@ -72,6 +72,11 @@ class Device
      */
     protected $socket;
 
+	/**
+	 * @var int
+	 */
+    protected $requestId = 0;
+
     public function __construct(Socket $socket, string $deviceName, string $token)
     {
         $this->socket     = $socket;
@@ -341,4 +346,20 @@ class Device
     {
         return $this->socket->recvFrom(self::PACKET_LENGTH, 0, $remote);
     }
+
+	/**
+	 * @return int
+	 */
+	public function getRequestId()
+	{
+		return $this->requestId;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function incrementRequestId()
+	{
+		return $this->requestId += 1;
+	}
 }
